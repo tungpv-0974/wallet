@@ -1,0 +1,57 @@
+2021-03-03 13:05:23,602 INFO o.s.b.StartupInfoLogger:55 [main] Starting CryptocurrencyWalletApplication using Java 11.0.10 on b122199-pc with PID 26300 (/home/phan.van.tung/Desktop/blockchain/cryptocurrency_wallet/target/classes started by SUN-ASTERISK\phan.van.tung in /home/phan.van.tung/Desktop/blockchain/cryptocurrency_wallet)
+2021-03-03 13:05:23,604 DEBUG o.s.b.StartupInfoLogger:56 [main] Running with Spring Boot v2.4.3, Spring v5.3.4
+2021-03-03 13:05:23,604 INFO o.s.b.SpringApplication:664 [main] The following profiles are active: dev
+2021-03-03 13:05:24,111 INFO o.s.d.r.c.RepositoryConfigurationDelegate:128 [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-03-03 13:05:24,121 INFO o.s.d.r.c.RepositoryConfigurationDelegate:188 [main] Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2021-03-03 13:05:24,572 INFO o.s.b.w.e.t.TomcatWebServer:108 [main] Tomcat initialized with port(s): 8080 (http)
+2021-03-03 13:05:24,581 INFO o.a.j.l.DirectJDKLog:173 [main] Initializing ProtocolHandler ["http-nio-8080"]
+2021-03-03 13:05:24,582 INFO o.a.j.l.DirectJDKLog:173 [main] Starting service [Tomcat]
+2021-03-03 13:05:24,582 INFO o.a.j.l.DirectJDKLog:173 [main] Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-03-03 13:05:24,666 INFO o.a.j.l.DirectJDKLog:173 [main] Initializing Spring embedded WebApplicationContext
+2021-03-03 13:05:24,667 INFO o.s.b.w.s.c.ServletWebServerApplicationContext:289 [main] Root WebApplicationContext: initialization completed in 1033 ms
+2021-03-03 13:05:24,757 INFO c.z.h.HikariDataSource:110 [main] HikariPool-1 - Starting...
+2021-03-03 13:05:24,858 INFO c.z.h.HikariDataSource:123 [main] HikariPool-1 - Start completed.
+2021-03-03 13:05:24,888 INFO o.h.j.i.u.LogHelper:31 [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-03-03 13:05:24,913 INFO o.h.Version:44 [main] HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-03-03 13:05:24,981 INFO o.h.a.c.r.j.JavaReflectionManager:56 [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-03-03 13:05:25,050 INFO o.h.d.Dialect:175 [main] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2021-03-03 13:05:25,155 INFO o.h.e.t.j.p.i.JtaPlatformInitiator:52 [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-03-03 13:05:25,161 INFO o.s.o.j.AbstractEntityManagerFactoryBean:437 [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-03-03 13:05:25,192 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration:221 [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-03-03 13:05:25,267 INFO o.s.s.c.ExecutorConfigurationSupport:181 [main] Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-03 13:05:25,274 DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter:625 [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-03-03 13:05:25,308 DEBUG o.s.w.s.h.AbstractHandlerMethodMapping:358 [main] 2 mappings in 'requestMappingHandlerMapping'
+2021-03-03 13:05:25,327 DEBUG o.s.w.s.h.SimpleUrlHandlerMapping:173 [main] Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-03-03 13:05:25,333 DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver:307 [main] ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-03-03 13:05:25,406 INFO o.s.b.a.s.s.UserDetailsServiceAutoConfiguration:86 [main] 
+
+Using generated security password: 6f496193-205d-4980-80a8-ba14f06f79d8
+
+2021-03-03 13:05:25,474 INFO o.s.s.w.DefaultSecurityFilterChain:51 [main] Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e886caf, org.springframework.security.web.context.SecurityContextPersistenceFilter@186481d4, org.springframework.security.web.header.HeaderWriterFilter@75a226ea, org.springframework.security.web.csrf.CsrfFilter@71b3ba5a, org.springframework.security.web.authentication.logout.LogoutFilter@5dd747c1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@97b5e6a, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1bdafb01, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@1d585fb, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3a54638b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ffa91dc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6de610c6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1884e671, org.springframework.security.web.session.SessionManagementFilter@5a1a20ae, org.springframework.security.web.access.ExceptionTranslationFilter@4c50cd7d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1530d0f2]
+2021-03-03 13:05:25,511 INFO o.a.j.l.DirectJDKLog:173 [main] Starting ProtocolHandler ["http-nio-8080"]
+2021-03-03 13:05:25,516 WARN o.s.c.s.AbstractApplicationContext:590 [main] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2021-03-03 13:05:25,518 INFO o.s.s.c.ExecutorConfigurationSupport:218 [main] Shutting down ExecutorService 'applicationTaskExecutor'
+2021-03-03 13:05:25,518 INFO o.s.o.j.AbstractEntityManagerFactoryBean:651 [main] Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-03-03 13:05:25,520 INFO c.z.h.HikariDataSource:350 [main] HikariPool-1 - Shutdown initiated...
+2021-03-03 13:05:25,533 INFO c.z.h.HikariDataSource:352 [main] HikariPool-1 - Shutdown completed.
+2021-03-03 13:05:25,535 INFO o.a.j.l.DirectJDKLog:173 [main] Pausing ProtocolHandler ["http-nio-8080"]
+2021-03-03 13:05:25,535 INFO o.a.j.l.DirectJDKLog:173 [main] Stopping service [Tomcat]
+2021-03-03 13:05:25,538 INFO o.a.j.l.DirectJDKLog:173 [main] Stopping ProtocolHandler ["http-nio-8080"]
+2021-03-03 13:05:25,539 INFO o.a.j.l.DirectJDKLog:173 [main] Destroying ProtocolHandler ["http-nio-8080"]
+2021-03-03 13:05:25,545 INFO o.s.b.a.l.ConditionEvaluationReportLoggingListener:136 [main] 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-03-03 13:05:25,552 ERROR o.s.b.d.LoggingFailureAnalysisReporter:40 [main] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+

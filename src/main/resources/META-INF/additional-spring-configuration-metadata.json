@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "wallet.app.jwtExpiration",
+      "type": "java.lang.String",
+      "description": "Description for wallet.app.jwtExpiration."
+    },
+    {
+      "name": "wallet.app.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for wallet.app.jwtSecret."
+    }
+  ]
+}
