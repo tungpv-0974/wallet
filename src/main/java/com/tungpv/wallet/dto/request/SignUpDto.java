@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
-public class SignUpForm {
+public class SignUpDto {
     @NotBlank
     @Size(min = 3, max = 50)
     private String name;

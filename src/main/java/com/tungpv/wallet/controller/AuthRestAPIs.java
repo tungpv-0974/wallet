@@ -1,7 +1,7 @@
 package com.tungpv.wallet.controller;
 
-import com.tungpv.wallet.dto.request.LoginForm;
-import com.tungpv.wallet.dto.request.SignUpForm;
+import com.tungpv.wallet.dto.request.LoginDto;
+import com.tungpv.wallet.dto.request.SignUpDto;
 import com.tungpv.wallet.dto.response.JwtResponse;
 import com.tungpv.wallet.entity.Role;
 import com.tungpv.wallet.entity.User;
@@ -19,7 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -47,7 +46,7 @@ public class AuthRestAPIs {
     JwtProvider jwtProvider;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -63,7 +62,7 @@ public class AuthRestAPIs {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpDto signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new BadRequestException("Fail -> Username is already taken!");
 
