@@ -29,7 +29,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    //    @NotBlank
     @Size(min = 3, max = 50)
     private String name;
 
@@ -53,8 +53,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String username, String email, String password) {
-        this.name = name;
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
