@@ -4,8 +4,7 @@ import com.tungpv.wallet.entity.User;
 import com.tungpv.wallet.entity.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VerificationTokenRepository
-        extends JpaRepository<VerificationToken, Long> {
+public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
 
     VerificationToken findByToken(String token);
 

@@ -19,9 +19,6 @@ public class RegistrationListener implements
     private UserService service;
 
     @Autowired
-    private MessageSource messages;
-
-    @Autowired
     private JavaMailSender mailSender;
 
     @Override

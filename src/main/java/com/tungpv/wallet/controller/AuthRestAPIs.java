@@ -29,15 +29,6 @@ public class AuthRestAPIs {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
     JwtProvider jwtProvider;
 
     @Autowired
@@ -52,7 +43,6 @@ public class AuthRestAPIs {
                         loginRequest.getPassword()
                 )
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
