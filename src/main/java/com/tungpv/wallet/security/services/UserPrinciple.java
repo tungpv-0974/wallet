@@ -30,6 +30,7 @@ public class UserPrinciple implements UserDetails {
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
+    private boolean isEnabled;
 
     public static UserPrinciple build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
@@ -42,7 +43,8 @@ public class UserPrinciple implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user.isEnabled()
         );
     }
 
@@ -73,11 +75,6 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
         return true;
     }
 

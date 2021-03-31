@@ -5,6 +5,25 @@ spring:
     password: ${database.password}
   jpa:
     generate-ddl: true
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    protocol: smtps
+    username: ${email.username}
+    password: ${email.password}
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+        smtps:
+          auth: true
+          starttls:
+            enable: true
+          timeout: 8000
+support:
+  email: tungpv@gmail.com
+
+
 
 wallet:
   app:

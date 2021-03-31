@@ -2,16 +2,13 @@ package com.tungpv.wallet.controller;
 
 import com.tungpv.wallet.dto.request.LoginDto;
 import com.tungpv.wallet.dto.request.SignUpDto;
+import com.tungpv.wallet.dto.request.VerifyEmailDto;
 import com.tungpv.wallet.dto.response.JwtResponse;
-import com.tungpv.wallet.entity.Role;
-import com.tungpv.wallet.entity.User;
-import com.tungpv.wallet.entity.enums.RoleName;
-import com.tungpv.wallet.exception.BadRequestException;
 import com.tungpv.wallet.repository.RoleRepository;
 import com.tungpv.wallet.repository.UserRepository;
 import com.tungpv.wallet.security.jwt.JwtProvider;
+import com.tungpv.wallet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -34,16 +29,10 @@ public class AuthRestAPIs {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
     JwtProvider jwtProvider;
+
+    @Autowired
+    UserService userService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
@@ -54,7 +43,6 @@ public class AuthRestAPIs {
                         loginRequest.getPassword()
                 )
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
@@ -63,41 +51,13 @@ public class AuthRestAPIs {
 
     @PostMapping("/signup")
     public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpDto signUpRequest) {
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            throw  new BadRequestException("Email is already in use!");
-        }
-
-        // Creating user's account
-        User user = new User(signUpRequest.getEmail(),
-                signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
-
-        Set<String> strRoles = Set.of("ROLE_USER");
-        Set<Role> roles = new HashSet<>();
-
-        strRoles.forEach(role -> {
-            switch (role) {
-                case "admin":
-                    Role adminRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                            .orElseThrow(() -> new BadRequestException("Cause: User Role not find."));
-                    roles.add(adminRole);
-
-                    break;
-                case "pm":
-                    Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-                            .orElseThrow(() -> new BadRequestException("Cause: User Role not find."));
-                    roles.add(pmRole);
-
-                    break;
-                default:
-                    Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                            .orElseThrow(() -> new BadRequestException("Cause: User Role not find."));
-                    roles.add(userRole);
-            }
-        });
-
-        user.setRoles(roles);
-        userRepository.save(user);
-
+        userService.createUser(signUpRequest);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/verify-email")
+    public ResponseEntity<String> verifyEmail(@Valid @RequestBody VerifyEmailDto verifyEmailDto) {
+        userService.verifyEmail(verifyEmailDto);
+        return ResponseEntity.noContent().build();
     }
 }
