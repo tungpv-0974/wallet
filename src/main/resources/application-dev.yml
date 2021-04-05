@@ -21,11 +21,19 @@ spring:
             enable: true
           timeout: 8000
 support:
-  email: tungpv@gmail.com
+  email: tungpv98@gmail.com
 
-
+blockchain:
+  bitcoin:
+    network: testnest
+    file-prefix:
+    file-location: /home/phan.van.tung/Desktop/DATN/wallet/my-block
+#    file-location: ${blockchain.bitcoin.file-location}
+    wallet-directory: /home/phan.van.tung/Desktop/DATN/wallet/wallets
+#    wallet-directory: ${blockchain.bitcoin.wallet-directory}
 
 wallet:
   app:
     jwtSecret: 124325
     jwtExpiration: 86400
+

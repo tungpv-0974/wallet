@@ -4,8 +4,6 @@ import com.tungpv.wallet.dto.request.LoginDto;
 import com.tungpv.wallet.dto.request.SignUpDto;
 import com.tungpv.wallet.dto.request.VerifyEmailDto;
 import com.tungpv.wallet.dto.response.JwtResponse;
-import com.tungpv.wallet.repository.RoleRepository;
-import com.tungpv.wallet.repository.UserRepository;
 import com.tungpv.wallet.security.jwt.JwtProvider;
 import com.tungpv.wallet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
