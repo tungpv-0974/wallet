@@ -9,6 +9,31 @@
       "name": "wallet.app.jwtSecret",
       "type": "java.lang.String",
       "description": "Description for wallet.app.jwtSecret."
+    },
+    {
+      "name": "support.email",
+      "type": "java.lang.String",
+      "description": "Description for support.email."
+    },
+    {
+      "name": "blockchain.bitcoin.network",
+      "type": "java.lang.String",
+      "description": "Description for blockchain.bitcoin.network."
+    },
+    {
+      "name": "blockchain.bitcoin.file-prefix",
+      "type": "java.lang.String",
+      "description": "Description for blockchain.bitcoin.file-prefix."
+    },
+    {
+      "name": "blockchain.bitcoin.file-location",
+      "type": "java.lang.String",
+      "description": "Description for blockchain.bitcoin.file-location."
+    },
+    {
+      "name": "blockchain.bitcoin.wallet-directory",
+      "type": "java.lang.String",
+      "description": "Description for blockchain.bitcoin.wallet-directory."
     }
   ]
 }
