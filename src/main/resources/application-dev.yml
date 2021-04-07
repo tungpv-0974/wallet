@@ -28,9 +28,9 @@ blockchain:
 #    network: regtest
     network: testnet
     file-prefix: bitcoinchain
-    file-location: /home/phan.van.tung/Desktop/DATN/wallet/chain
+    file-location: C:\Users\tungp\My Documents\wallet\chain
 #    file-location: ${blockchain.bitcoin.file-location}
-    wallet-directory: /home/phan.van.tung/Desktop/DATN/wallet/wallets
+    wallet-directory: C:\Users\tungp\My Documents\wallet\wallets
 #    wallet-directory: ${blockchain.bitcoin.wallet-directory}
 
 wallet:
