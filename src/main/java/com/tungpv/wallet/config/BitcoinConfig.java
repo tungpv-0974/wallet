@@ -1,19 +1,22 @@
 package com.tungpv.wallet.config;
 
-import org.bitcoinj.core.Context;
-import org.bitcoinj.core.ECKey;
-import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.*;
 import org.bitcoinj.kits.WalletAppKit;
+import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.params.MainNetParams;
 import org.bitcoinj.params.RegTestParams;
 import org.bitcoinj.params.TestNet3Params;
+import org.bitcoinj.store.BlockStoreException;
+import org.bitcoinj.store.SPVBlockStore;
 import org.bitcoinj.utils.BriefLogFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.io.File;
+import java.io.IOException;
 
 @Configuration
 public class BitcoinConfig {
@@ -50,7 +53,7 @@ public class BitcoinConfig {
 
     @Bean
     public File locationsFile() {
-        return new File(btcFileLocation);
+        return new File(btcFileLocation, filePrefix + ".spvchain");
     }
 
     @Bean
@@ -64,5 +67,17 @@ public class BitcoinConfig {
             }
         };
     }
+
+//    @Bean
+//    @Scope("singleton")
+//    public PeerGroup peerGroup(@Autowired NetworkParameters networkParameters, @Autowired File locationFile) throws BlockStoreException, IOException {
+////        Context context = new Context(networkParameters);
+////        Context.propagate(context);
+//        SPVBlockStore spvBlockStore = new SPVBlockStore(networkParameters, locationFile);
+//        BlockChain chain = new BlockChain(networkParameters, spvBlockStore);
+//        PeerGroup peerGroup = new PeerGroup(networkParameters, chain);
+//        peerGroup.addPeerDiscovery(new DnsDiscovery(networkParameters));
+//        return peerGroup;
+//    }
 
 }

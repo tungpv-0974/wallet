@@ -3,10 +3,14 @@ package com.tungpv.wallet.service;
 
 import com.tungpv.wallet.exception.BadRequestException;
 import com.tungpv.wallet.exception.ServiceException;
+import org.bitcoinj.core.Coin;
 import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.PeerGroup;
+import org.bitcoinj.core.Transaction;
 import org.bitcoinj.script.Script;
 import org.bitcoinj.wallet.UnreadableWalletException;
 import org.bitcoinj.wallet.Wallet;
+import org.bitcoinj.wallet.listeners.WalletCoinsReceivedEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,6 +28,9 @@ public class BitcoinNetworkService {
     @Value("${blockchain.bitcoin.wallet-directory}")
     private String walletDirectory;
 
+//    @Autowired
+//    private PeerGroup peerGroup;
+
     public Wallet createWallet(String email) {
         if (getWalletByUser(email) != null) {
             throw new BadRequestException("Wallet already exists");
@@ -32,6 +39,17 @@ public class BitcoinNetworkService {
         String localWalletPath = walletDirectory.concat("/").concat(base64NameFolder);
         File file = new File(localWalletPath);
         Wallet wallet = Wallet.createDeterministic(networkParameters, Script.ScriptType.P2PKH);
+        wallet.addCoinsReceivedEventListener(new WalletCoinsReceivedEventListener() {
+            @Override
+            public void onCoinsReceived(Wallet wallet, Transaction tx, Coin prevBalance, Coin newBalance) {
+                System.out.println("\nReceived tx " + tx.getHashAsString());
+                System.out.println(tx.toString());
+            }
+        });
+//        peerGroup.addWallet(wallet);
+//        peerGroup.startAsync();
+//        peerGroup.downloadBlockChain();
+//        peerGroup.stopAsync();
         try {
             wallet.saveToFile(file);
         } catch (IOException e) {

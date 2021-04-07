@@ -25,9 +25,10 @@ support:
 
 blockchain:
   bitcoin:
-    network: testnest
-    file-prefix:
-    file-location: /home/phan.van.tung/Desktop/DATN/wallet/my-block
+#    network: regtest
+    network: testnet
+    file-prefix: bitcoinchain
+    file-location: /home/phan.van.tung/Desktop/DATN/wallet/chain
 #    file-location: ${blockchain.bitcoin.file-location}
     wallet-directory: /home/phan.van.tung/Desktop/DATN/wallet/wallets
 #    wallet-directory: ${blockchain.bitcoin.wallet-directory}
