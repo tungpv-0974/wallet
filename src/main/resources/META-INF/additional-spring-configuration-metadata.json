@@ -34,11 +34,6 @@
       "name": "blockchain.bitcoin.wallet-directory",
       "type": "java.lang.String",
       "description": "Description for blockchain.bitcoin.wallet-directory."
-    },
-    {
-      "name": "blockchain.bitcoin.check-point",
-      "type": "java.lang.String",
-      "description": "Description for blockchain.bitcoin.check-point."
     }
   ]
 }

@@ -1,18 +1,22 @@
 package com.tungpv.wallet.controller;
 
 import com.tungpv.wallet.dto.response.CreateWalletResponseDto;
-import com.tungpv.wallet.dto.response.WalletBalanceDto;
-import com.tungpv.wallet.dto.response.WalletCurrentReceiveAddressDto;
 import com.tungpv.wallet.security.services.UserPrinciple;
 import com.tungpv.wallet.service.BitcoinNetworkService;
+import org.bitcoinj.core.Address;
+import org.bitcoinj.core.Utils;
+import org.bitcoinj.wallet.DeterministicSeed;
 import org.bitcoinj.wallet.Wallet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.io.IOException;
+import java.util.Objects;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -24,19 +28,17 @@ public class WalletController {
     private BitcoinNetworkService bitcoinService;
 
     @PostMapping("/bitcoin/create")
-    public ResponseEntity<CreateWalletResponseDto> createBitcoinWallet(@AuthenticationPrincipal UserPrinciple userPrinciple) throws IOException {
-        return ResponseEntity.ok(bitcoinService.createWallet(userPrinciple.getEmail()));
-    }
+    public ResponseEntity<CreateWalletResponseDto> createBitcoinWallet(@AuthenticationPrincipal UserPrinciple userPrinciple) {
+        Wallet wallet = bitcoinService.createWallet(userPrinciple.getEmail());
+        Address address = wallet.currentReceiveAddress();
+        CreateWalletResponseDto responseDto = new CreateWalletResponseDto();
 
-    @GetMapping("/bitcoin/get-address")
-    public ResponseEntity<WalletCurrentReceiveAddressDto> getBitcoinAddress(@AuthenticationPrincipal UserPrinciple userPrinciple) {
-        return ResponseEntity.ok(bitcoinService.getCurrentReceiveAddress(userPrinciple.getEmail()));
-    }
+        DeterministicSeed seed = wallet.getKeyChainSeed();
+        String mnemonicCode = Utils.SPACE_JOINER.join(Objects.requireNonNull(seed.getMnemonicCode()));
 
-    @GetMapping("/bitcoin/get-balance")
-    public ResponseEntity<WalletBalanceDto> getWalletBalance(@AuthenticationPrincipal UserPrinciple userPrinciple) {
-        Wallet wallet = bitcoinService.getWalletByUser(userPrinciple.getEmail());
-        WalletBalanceDto responseDto = new WalletBalanceDto(wallet.getBalance().toFriendlyString());
+        responseDto.setAddress(address.toString());
+        responseDto.setBalance(wallet.getBalance().getValue());
+        responseDto.setMnemonicCode(mnemonicCode);
         return ResponseEntity.ok(responseDto);
     }
 }
