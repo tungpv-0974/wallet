@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class WalletBalanceDto {
-
-    private String balance;
+@NoArgsConstructor
+@AllArgsConstructor
+public class WalletCurrentReceiveAddressDto {
+    private String address;
 }
