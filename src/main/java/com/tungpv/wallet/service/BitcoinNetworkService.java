@@ -2,6 +2,7 @@ package com.tungpv.wallet.service;
 
 
 import com.google.protobuf.ByteString;
+import com.tungpv.wallet.dto.request.SendBitcoinDto;
 import com.tungpv.wallet.dto.response.CreateWalletResponseDto;
 import com.tungpv.wallet.dto.response.WalletCurrentReceiveAddressDto;
 import com.tungpv.wallet.exception.BadRequestException;
@@ -10,10 +11,8 @@ import com.tungpv.wallet.listener.WalletListener;
 import com.tungpv.wallet.utils.Const;
 import org.bitcoinj.core.*;
 import org.bitcoinj.script.Script;
-import org.bitcoinj.wallet.DeterministicSeed;
-import org.bitcoinj.wallet.UnreadableWalletException;
-import org.bitcoinj.wallet.Wallet;
-import org.bitcoinj.wallet.WalletFiles;
+import org.bitcoinj.utils.MonetaryFormat;
+import org.bitcoinj.wallet.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -23,6 +22,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 
@@ -90,6 +90,26 @@ public class BitcoinNetworkService {
         } catch (UnreadableWalletException e) {
             throw new ServiceException("Server error");
         }
+    }
+
+    public void sendBitcoinToAddress(SendBitcoinDto sendBitcoinDto, String email){
+        Optional<Wallet> walletOptional = getWalletInMemByUser(email);
+        Wallet wallet = walletOptional.get();
+        Address address = Address.fromString(networkParameters, sendBitcoinDto.getAddress());
+        Coin coin = MonetaryFormat.MBTC.parse(sendBitcoinDto.getAmount());
+        SendRequest sendRequest = SendRequest.to(address, coin);
+        try {
+            Transaction transaction = wallet.sendCoinsOffline(sendRequest);
+            peerGroup.broadcastTransaction(transaction);
+        } catch (InsufficientMoneyException e) {
+            e.printStackTrace();
+            throw new BadRequestException("Has error");
+        }
+    }
+
+    private Optional<Wallet> getWalletInMemByUser(String email){
+        String filename = Base64.getEncoder().encodeToString(email.getBytes());
+        return wallets.stream().filter(wallet -> wallet.getTag(Const.PATH_FILE_TAG).toStringUtf8().equals(filename)).findFirst();
     }
 
     private Wallet addListener(Wallet wallet) {
