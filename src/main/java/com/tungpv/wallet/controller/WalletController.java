@@ -1,5 +1,6 @@
 package com.tungpv.wallet.controller;
 
+import com.tungpv.wallet.dto.request.SendBitcoinDto;
 import com.tungpv.wallet.dto.response.CreateWalletResponseDto;
 import com.tungpv.wallet.dto.response.WalletBalanceDto;
 import com.tungpv.wallet.dto.response.WalletCurrentReceiveAddressDto;
@@ -38,5 +39,11 @@ public class WalletController {
         Wallet wallet = bitcoinService.getWalletByUser(userPrinciple.getEmail());
         WalletBalanceDto responseDto = new WalletBalanceDto(wallet.getBalance().toFriendlyString());
         return ResponseEntity.ok(responseDto);
+    }
+
+    @PostMapping("bitcoin/send")
+    public ResponseEntity sendCoinToAddress(@AuthenticationPrincipal UserPrinciple userPrinciple, @RequestBody SendBitcoinDto sendBitcoinDto) {
+        bitcoinService.sendBitcoinToAddress(sendBitcoinDto, userPrinciple.getEmail());
+        return ResponseEntity.noContent().build();
     }
 }
