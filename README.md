@@ -29,6 +29,18 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 ```
 
+## Show API Document with Swagger
+JSON response
+``` 
+{{host}}/v2/api-docs
+ex: localhost:8080/v2/api-docs
+``` 
+Swagger UI
+``` 
+{{host}}/swagger-ui.html
+ex: localhost:8080/swagger-ui.html
+``` 
+
 ## Copyright
 
 [Phan Van Tung](https://github.com/tungpv-0974)
