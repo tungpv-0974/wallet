@@ -10,7 +10,9 @@ spring:
     port: 465
     protocol: smtps
     username: ${email.username}
+#    username: abc@gmail.com
     password: ${email.password}
+#    password: 123456
     properties:
       mail:
         transport:
