@@ -24,6 +24,7 @@ spring:
           timeout: 8000
 support:
   email: tungpv98@gmail.com
+  verifyEmailUrl: http://localhost:4200/account/verify-email
 
 blockchain:
   bitcoin:
@@ -41,3 +42,4 @@ wallet:
   app:
     jwtSecret: 124325
     jwtExpiration: 86400
+    jwtRefreshExpiration: 9999999

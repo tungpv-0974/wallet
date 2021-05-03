@@ -2,15 +2,17 @@ package com.tungpv.wallet.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class SignUpDto {
+@NoArgsConstructor
+public class SignUpDto implements Serializable {
 //    @NotBlank
 //    @Size(min = 3, max = 50)
 //    private String name;

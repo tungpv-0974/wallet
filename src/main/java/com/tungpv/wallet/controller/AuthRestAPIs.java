@@ -1,16 +1,20 @@
 package com.tungpv.wallet.controller;
 
 import com.tungpv.wallet.dto.request.LoginDto;
+import com.tungpv.wallet.dto.request.RefreshTokenDto;
 import com.tungpv.wallet.dto.request.SignUpDto;
 import com.tungpv.wallet.dto.request.VerifyEmailDto;
 import com.tungpv.wallet.dto.response.JwtResponse;
+import com.tungpv.wallet.exception.BadRequestException;
 import com.tungpv.wallet.security.jwt.JwtProvider;
+import com.tungpv.wallet.security.services.UserPrinciple;
 import com.tungpv.wallet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +35,7 @@ public class AuthRestAPIs {
     @Autowired
     UserService userService;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDto loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -43,7 +47,8 @@ public class AuthRestAPIs {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtProvider.generateJwtToken(authentication);
-        return ResponseEntity.ok(new JwtResponse(jwt));
+        String jwtRefresh = jwtProvider.generateJwtRefreshToken(loginRequest.getEmail());
+        return ResponseEntity.ok(new JwtResponse(jwt, jwtRefresh));
     }
 
     @PostMapping("/signup")
@@ -52,8 +57,19 @@ public class AuthRestAPIs {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/token/refresh")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody RefreshTokenDto refreshToken){
+        if (!jwtProvider.validateJwtToken(refreshToken.getRefreshToken())){
+            throw new BadRequestException("Refresh token is invalid!");
+        }
+        String username = jwtProvider.getUserNameFromJwtToken(refreshToken.getRefreshToken());
+        String jwt = jwtProvider.renewAccessToken(username);
+        String jwtRefresh = jwtProvider.generateJwtRefreshToken(username);
+        return ResponseEntity.ok(new JwtResponse(jwt, jwtRefresh));
+    }
+
     @PostMapping("/verify-email")
-    public ResponseEntity<String> verifyEmail(@Valid @RequestBody VerifyEmailDto verifyEmailDto) {
+    public ResponseEntity<?> verifyEmail(@Valid @RequestBody VerifyEmailDto verifyEmailDto) {
         userService.verifyEmail(verifyEmailDto);
         return ResponseEntity.noContent().build();
     }
