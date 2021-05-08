@@ -16,12 +16,12 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
-                .allowCredentials(true)
-                .allowedHeaders("X-PINGOTHER", "Content-Type", "Origin", "X-Auth-Token", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With", "Basic")
-                .allowedOrigins("http://localhost:4200");
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+//                .allowCredentials(true)
+//                .allowedHeaders("X-PINGOTHER", "Content-Type", "Origin", "X-Auth-Token", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With", "Basic")
+//                .allowedOrigins("http://localhost:4200");
+//    }
 }
