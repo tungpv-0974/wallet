@@ -12,8 +12,11 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CreateWalletResponseDto implements Serializable {
-    private String address;
-    private String balance;
-    private String mnemonicCode;
+public class TransactionResponseDto implements Serializable {
+    private String hash;
+    private String value;
+    private String fee;
+    private Integer confirmations;
+    private String updateTime;
+    private String type;
 }

@@ -26,15 +26,19 @@ support:
   email: tungpv98@gmail.com
   verifyEmailUrl: http://localhost:4200/account/verify-email
 
+firebase:
+  sdk-path-key: src/main/resources/bitcoin-wallet-d2ebd-firebase-adminsdk-mogge-92c0038994.json
+  database-url: https://bitcoin-wallet-d2ebd-default-rtdb.asia-southeast1.firebasedatabase.app
+
 blockchain:
   bitcoin:
 #    network: regtest
     network: testnet
     file-prefix: bitcoinchain
-    file-location: C:\Users\tungp\My Documents\wallet\chain
+    file-location: /home/phan.van.tung/Desktop/DATN/wallet/chain
 #    file-location: ${blockchain.bitcoin.file-location}
-    wallet-directory: C:\Users\tungp\My Documents\wallet\wallets
-    check-point: C:\Users\tungp\My Documents\wallet\chain\checkpoint.txt
+    wallet-directory: /home/phan.van.tung/Desktop/DATN/wallet/wallets
+    check-point: /home/phan.van.tung/Desktop/DATN/wallet/checkpoint.txt
 #    check-point: ${blockchain.bitcoin.check-point}
 #    wallet-directory: ${blockchain.bitcoin.wallet-directory}
 

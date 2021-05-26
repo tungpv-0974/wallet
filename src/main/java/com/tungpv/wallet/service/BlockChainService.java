@@ -42,6 +42,9 @@ public class BlockChainService {
     @Autowired
     private File checkpointFile;
 
+    @Autowired
+    private FirebaseService firebaseService;
+
     @PostConstruct
     public void createBlockChain() {
 
@@ -92,7 +95,7 @@ public class BlockChainService {
     }
 
     private void addWalletListeners() {
-        WalletListener walletListener = new WalletListener(walletDirectory);
+        WalletListener walletListener = new WalletListener(walletDirectory, firebaseService, networkParameters);
         wallets.forEach(wallet -> {
             wallet.addChangeEventListener(walletListener);
             wallet.addCoinsReceivedEventListener(walletListener);

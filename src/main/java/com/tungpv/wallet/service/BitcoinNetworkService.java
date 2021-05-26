@@ -23,6 +23,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -41,7 +42,10 @@ public class BitcoinNetworkService {
     @Autowired
     private List<Wallet> wallets;
 
-    public CreateWalletResponseDto createWallet(String email) throws IOException {
+    @Autowired
+    private FirebaseService firebaseService;
+
+    public CreateWalletResponseDto createWallet(String email) throws IOException, ExecutionException, InterruptedException {
         if (getWalletByUser(email) != null) {
             throw new BadRequestException("Wallet already exists");
         }
@@ -66,9 +70,9 @@ public class BitcoinNetworkService {
         String mnemonicCode = Utils.SPACE_JOINER.join(Objects.requireNonNull(seed.getMnemonicCode()));
 
         responseDto.setAddress(address.toString());
-        responseDto.setBalance(wallet.getBalance().getValue());
+        responseDto.setBalance(wallet.getBalance().toFriendlyString());
         responseDto.setMnemonicCode(mnemonicCode);
-
+        firebaseService.saveWallet(base64NameFolder, responseDto);
         return responseDto;
     }
 
@@ -83,7 +87,7 @@ public class BitcoinNetworkService {
         String localWalletPath = walletDirectory.concat(Const.SLASH).concat(filename);
         File walletFile = new File(localWalletPath);
         if (!walletFile.exists() || walletFile.isDirectory()) {
-            throw new BadRequestException("User has not created a wallet!");
+            return null;
         }
         try {
             return Wallet.loadFromFile(walletFile, null);
@@ -113,7 +117,7 @@ public class BitcoinNetworkService {
     }
 
     private Wallet addListener(Wallet wallet) {
-        WalletListener walletListener = new WalletListener(walletDirectory);
+        WalletListener walletListener = new WalletListener(walletDirectory, firebaseService, networkParameters);
         wallet.addChangeEventListener(walletListener);
         wallet.addCoinsReceivedEventListener(walletListener);
         wallet.addCoinsSentEventListener(walletListener);

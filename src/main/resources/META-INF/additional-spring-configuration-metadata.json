@@ -39,6 +39,21 @@
       "name": "blockchain.bitcoin.check-point",
       "type": "java.lang.String",
       "description": "Description for blockchain.bitcoin.check-point."
+    },
+    {
+      "name": "support.verifyEmailUrl",
+      "type": "java.lang.String",
+      "description": "Description for support.verifyEmailUrl."
+    },
+    {
+      "name": "firebase.sdk-path-key",
+      "type": "java.lang.String",
+      "description": "Description for firebase.sdk-path-key."
+    },
+    {
+      "name": "firebase.database-url",
+      "type": "java.lang.String",
+      "description": "Description for firebase.database-url."
     }
   ]
 }
