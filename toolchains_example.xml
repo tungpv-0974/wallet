@@ -15,7 +15,7 @@
 			<version>11</version>
 		</provides>
 		<configuration>
-			<jdkHome>local of java 11</jdkHome>
+			<jdkHome>/usr/lib/jvm/java-1.11.0-openjdk-amd64</jdkHome>
 		</configuration>
 	</toolchain>
 	<toolchain>
